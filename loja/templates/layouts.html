@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    
+    <link rel="icon" href="data:,">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.rtl.min.css')}}">
+
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {% block content %} 
+
+    
+
+    {% endblock content %}
+
+  
+    <script type="javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    
+    
+  </body>
+</html>
+
+
