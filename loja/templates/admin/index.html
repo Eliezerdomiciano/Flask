@@ -12,7 +12,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -25,9 +24,6 @@
               <a class="nav-link active" aria-current="page" href="{{url_for('addproduto')}}">Cadastrar Produtos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('admin')}}">Produtos</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{{url_for('marcas')}}">Marcas</a>
             </li>
             </li>
@@ -35,16 +31,6 @@
                 <a class="nav-link" href="{{url_for('categoria')}}">Categorias</a>
             </li>
             
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Adicionar Produtos
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{url_for('addproduto')}}">Adicionar Produto</a>
-                <a class="dropdown-item" href="{{url_for('addmarca')}}">Adicionar Marca</a>
-                <a class="dropdown-item" href="{{url_for('addcat')}}">Adicionar Categoria</a>
-              </div>
-            </li>
           </ul>
 
         </div>
@@ -80,32 +66,10 @@
                
                 <td><a href="{{url_for('updateproduto', id=produto.id)}}" class="btn btn-dark btn-sm">Editar</a></td>
                 <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-{{produto.id}}">
-                   Deletar
-                  </button>
+                  <a href="{{url_for('deleteproduto', id=produto.id)}}" class="btn btn-sm btn-danger" >Deletar</a> 
                 </td>
-                <!-- <td>{{produto.index}}</td> -->
               
            </tr>  
-
-
-<div class="modal fade" id="exampleModal-{{produto.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">{{produto.name}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p class="text-danger">Deseja Realmente deletar este produto? {{produto.name}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-dange btn-sm">Deletar</button>
-      </div>
-    </div>
-  </div>
-</div>
    
            {% endfor %}    
         </tbody>

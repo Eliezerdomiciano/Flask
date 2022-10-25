@@ -1,13 +1,43 @@
-from ast import Delete
 import secrets
 import os
 from flask import redirect, render_template, url_for, flash, request, session, current_app
 
 
-from loja.admin.rotas import categoria
+from loja.admin.rotas import categoria, marcas
 from .forms import Addprodutos
 from loja import db, app, photos
 from .models import Marca, Categoria, Addproduto
+
+
+@app.route('/')
+def home():
+    pagina = request.args.get('pagina', 1, type=int)
+    produtos = Addproduto.query.filter(Addproduto.estoque > 0).pagina(pagina=pagina, per_pagina=1)
+    marcas = Marca.query.join(
+        Addproduto, (Marca.id == Addproduto.marca_id)).all()
+    categorias = Categoria.query.join(
+        Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
+    return render_template('/produtos/index.html', produtos=produtos, marcas=marcas, categorias=categorias)
+
+
+@app.route('/marca/<int:id>')
+def get_marca(id):
+    marca = Addproduto.query.filter_by(marca_id=id)
+    marcas = Marca.query.join(
+        Addproduto, (Marca.id == Addproduto.marca_id)).all()
+    categorias = Categoria.query.join(
+        Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
+    return render_template('/produtos/index.html', marca=marca, marcas=marcas, categorias=categorias)
+
+
+@app.route('/categorias/<int:id>')
+def get_categoria(id):
+    get_cat_prod = Addproduto.query.filter_by(categoria_id=id)
+    categorias = Categoria.query.join(
+        Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
+    marcas = Marca.query.join(
+        Addproduto, (Marca.id == Addproduto.marca_id)).all()
+    return render_template('/produtos/index.html', get_cat_prod=get_cat_prod, categorias=categorias, marcas=marcas)
 
 
 @app.route('/addmarca', methods=['GET', 'POST'])
@@ -133,7 +163,7 @@ def addproduto():
         except:
             flash('Tipo de imagem não reconhecida', 'Danger')
 
-    return render_template('produtos/addproduto.html', title="Cadastrar Produtos", form=form, marcas=marcas, categorias=categorias)
+    return render_template('/produtos/addproduto.html', title="Cadastrar Produtos", form=form, marcas=marcas, categorias=categorias)
 
 
 @app.route('/updateproduto/<int:id>', methods=['GET', 'POST'])
@@ -204,3 +234,26 @@ def updateproduto(id):
     form.cores.data = produto.cores
 
     return render_template('/produtos/updateproduto.html', title='Atualizar Produtos', form=form, marcas=marcas, categorias=categorias, produto=produto)
+
+
+@app.route('/deleteproduto/<int:id>', methods=['GET', 'POST'])
+def deleteproduto(id):
+    produto = Addproduto.query.get_or_404(id)
+    if request.method == 'POST':
+        if request.files.get('imagem_1'):
+            try:
+
+                os.remove(os.path.join(current_app.root_path,
+                          "static/imagens/" + produto.imagem_1))
+                os.remove(os.path.join(current_app.root_path,
+                          "static/imagens/" + produto.imagem_2))
+                os.remove(os.path.join(current_app.root_path,
+                          "static/imagens/" + produto.imagem_3))
+            except Exception as e:
+                print(e)
+        db.session.delete(produto)
+        db.session.commit()
+        return redirect(url_for('admin'))
+    flash(f'Produto {produto.name} não foi deletado com sucesso', 'warning')
+
+    return redirect(url_for('admin'))

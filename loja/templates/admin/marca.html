@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('admin')}}">Produtos <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" aria-current="page" href="{{url_for('admin')}}">Produtos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url_for('marcas')}}">Marcas</a>
@@ -26,16 +26,6 @@
                 <a class="nav-link" href="{{url_for('categoria')}}">Categorias</a>
             </li>
             
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Adicionar Produtos
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{url_for('addproduto')}}">Adicionar Produto</a>
-                <a class="dropdown-item" href="{{url_for('addmarca')}}">Adicionar Marca</a>
-                <a class="dropdown-item" href="{{url_for('addcat')}}">Adicionar Categoria</a>
-              </div>
-            </li>
           </ul>
 
 
@@ -68,7 +58,7 @@
                 <td><a href="{{url_for('updatemarca', id=marca.id)}}" class="btn btn-sm btn-dark">Editar</a></td>
                 <td>
                   <a href="{{url_for('deletemarca', id=marca.id)}}" class="btn btn-sm btn-danger" >Deletar</a>
-                </td>
+                </td> 
            </tr>           
         
            {% endfor %} 

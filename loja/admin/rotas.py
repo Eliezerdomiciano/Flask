@@ -6,7 +6,9 @@ from .models import User
 import os
 
 
-@app.route('/')
+
+
+@app.route('/admin')
 def admin():
     if 'email' not in session:
         flash(f'Favor fazer login Primeiro', 'success')

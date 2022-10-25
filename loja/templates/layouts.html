@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     
@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.rtl.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bulma-rtl.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bulma.min.css')}}">
+
 
     <title>{{title}}</title>
   </head>
@@ -18,10 +22,12 @@
 
     {% endblock content %}
 
-  
-    <script type="javascript" src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
-    <script type="javascript" src="{{url_for('static', filename='js/popper.min.js')}}"></script>
-    <script type="javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='/js/bootstrap.min.js')}}"></link>
+    <script type="javascript" src="{{url_for('static', filename='/js/bootstrap.bundle.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='/js/jquery-2.1.3.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='/js/jquery-3.3.1.slim.min.js')}}"></script>
+    <script type="javascript" src="{{url_for('static', filename='/js/popper.min.js')}}"></script>
+
     
     
   </body>
