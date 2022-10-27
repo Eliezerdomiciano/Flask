@@ -33,6 +33,7 @@
             <th>Aprovar</th>
             <th>Reprovar</th>
             <th>Prazo de Entrega</th>
+            <th>Enviar Para Cliene</th>
 
             
         </thead>
@@ -43,18 +44,16 @@
                 <td>{{loop.index}}</td>
                 <td>{{loop.index}}</td>
                 <td>{{loop.index}}</td>
+                <td>{{loop.index}}</td>
                 <td><img src="{{url_for('static', filename='imagens/' + produto.imagem_1)}}" width="130" height="100"></td>
                 <td>{{produto.name}}</td>
                 <td>R${{produto.preco}}</td>
                 <td>{{produto.desconto}} %</td>
                 <td>{{produto.marca.name}}</td>
                 <td>{{loop.index}}</td>
-               
-                <td><a href="{{url_for('updateproduto', id=produto.id)}}" class="btn btn-dark btn-sm">Editar</a></td>
-                <td>
-                  <a href="{{url_for('deleteproduto', id=produto.id)}}" class="btn btn-sm btn-danger" >Deletar</a> 
-                </td>
-              
+                <td><a href="{{url_for('updateproduto', id=produto.id)}}" class="btn btn-dark btn-sm">Reprovar</a></td>
+                <td><a href="{{url_for('deleteproduto', id=produto.id)}}" class="btn btn-sm btn-danger" >Aprovar</a></td>
+                <td><a href="{{url_for('deleteproduto', id=produto.id)}}" class="btn btn-sm btn-danger" >Enviar</a></td> 
            </tr>  
    
            {% endfor %}    

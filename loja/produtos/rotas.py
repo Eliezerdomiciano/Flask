@@ -11,34 +11,40 @@ from .models import Marca, Categoria, Addproduto
 
 @app.route('/')
 def home():
-    # pagina = request.args.get('pagina', 1, type=int)
-    # .pagina(pagina=pagina, per_pagina=1)
-    produtos = Addproduto.query.filter(Addproduto.estoque > 0)
+    pagina = request.args.get('pagina', 1, type=int)
+    produtos = Addproduto.query.filter(
+        Addproduto.estoque > 0).paginate(page=pagina, per_page=3)
     marcas = Marca.query.join(
         Addproduto, (Marca.id == Addproduto.marca_id)).all()
     categorias = Categoria.query.join(
         Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
-    return render_template('/produtos/index.html', produtos=produtos, marcas=marcas, categorias=categorias)
+    return render_template('produtos/index.html', produtos=produtos, marcas=marcas, categorias=categorias)
 
 
 @app.route('/marca/<int:id>')
 def get_marca(id):
-    marca = Addproduto.query.filter_by(marca_id=id)
+    pagina = request.args.get('pagina', 1, type=int)
+    get_m = Marca.query.filter_by(id=id).first_or_404()
+    marca = Addproduto.query.filter_by(
+        marca=get_m).paginate(page=pagina, per_page=3)
     marcas = Marca.query.join(
         Addproduto, (Marca.id == Addproduto.marca_id)).all()
     categorias = Categoria.query.join(
         Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
-    return render_template('/produtos/index.html', marca=marca, marcas=marcas, categorias=categorias)
+    return render_template('/produtos/index.html', marca=marca, marcas=marcas, categorias=categorias, get_m=get_m)
 
 
 @app.route('/categorias/<int:id>')
 def get_categoria(id):
-    get_cat_prod = Addproduto.query.filter_by(categoria_id=id)
+    pagina = request.args.get('pagina', 1, type=int)
+    get_cat = Categoria.query.filter_by(id=id).first_or_404()
+    get_cat_prod = Addproduto.query.filter_by(
+        categoria=get_cat).paginate(page=pagina, per_page=3)
     categorias = Categoria.query.join(
         Addproduto, (Categoria.id == Addproduto.categoria_id)).all()
     marcas = Marca.query.join(
         Addproduto, (Marca.id == Addproduto.marca_id)).all()
-    return render_template('/produtos/index.html', get_cat_prod=get_cat_prod, categorias=categorias, marcas=marcas)
+    return render_template('/produtos/index.html', get_cat_prod=get_cat_prod, categorias=categorias, marcas=marcas, get_cat=get_cat)
 
 
 @app.route('/addmarca', methods=['GET', 'POST'])
