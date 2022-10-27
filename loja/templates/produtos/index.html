@@ -4,20 +4,16 @@
 
 <div class="container">
   <div class="row">
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Pagina Inicial</a>
+      <a class="navbar-brand" href="/">Pagina Inicial</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 ">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Todos Produtos</a>
-          </li>
 <!--#################################################################################################################################################################################################-->
             
-          <div class="dropdown is-hoverable" style=" position: relative; left: 610px; margin-top: 5px ">
+          <div class="dropdown is-hoverable" style=" position: relative; left: 580px; margin-top: 2px ">
               <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
                   <span>Marcas</span>
@@ -37,7 +33,7 @@
               </div>
             </div>
 
-            <div class="dropdown is-hoverable"  style=" position: relative; left: 370px; margin-top: 5px ">
+            <div class="dropdown is-hoverable"  style=" position: relative; left: 330px; margin-top:2px ">
               <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
                   <span>Categorias</span>
@@ -57,14 +53,28 @@
               </div>
             </div>
         </ul>
-        <form class="d-flex" style=" position: relative; left: 500px; margin-bottom: 2px " role="search">
+        <form class="d-flex" style=" position: relative; left: 450px; margin-bottom: 2px " role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
+    <div class="navbar-end" style=" position: relative; left: 40px; margin-bottom: 2px ">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="{{url_for('registrar')}}">
+            <strong>Cadastrar-se</strong>
+          </a>
+          <a class="button is-light" href="{{url_for('login')}}">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   </nav>
 </div>
+
 <!--#################################################################################################################################################################################################-->
 <div class="container">
     <div class="row">

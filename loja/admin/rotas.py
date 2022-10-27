@@ -6,8 +6,6 @@ from .models import User
 import os
 
 
-
-
 @app.route('/admin')
 def admin():
     if 'email' not in session:
@@ -33,6 +31,15 @@ def categoria():
         return redirect(url_for('login'))
     categorias = Categoria.query.order_by(Categoria.id.desc()).all()
     return render_template('admin/marca.html', title="Categorias", categorias=categorias)
+
+
+@app.route('/pedidos')
+def pedidos():
+    if 'email' not in session:
+        flash(f'Favor fazer login Primeiro', 'success')
+        return redirect(url_for('login'))
+    categorias = Categoria.query.order_by(Categoria.id.desc()).all()
+    return render_template('admin/pagina_pedidos.html', title="Categorias", categorias=categorias)
 
 
 @app.route('/registrar', methods=['GET', 'POST'])

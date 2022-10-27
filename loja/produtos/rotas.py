@@ -11,8 +11,9 @@ from .models import Marca, Categoria, Addproduto
 
 @app.route('/')
 def home():
-    pagina = request.args.get('pagina', 1, type=int)
-    produtos = Addproduto.query.filter(Addproduto.estoque > 0).pagina(pagina=pagina, per_pagina=1)
+    # pagina = request.args.get('pagina', 1, type=int)
+    # .pagina(pagina=pagina, per_pagina=1)
+    produtos = Addproduto.query.filter(Addproduto.estoque > 0)
     marcas = Marca.query.join(
         Addproduto, (Marca.id == Addproduto.marca_id)).all()
     categorias = Categoria.query.join(

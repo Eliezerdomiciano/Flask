@@ -1,37 +1,18 @@
-{% extends 'layouts.html' %}
+{% extends 'layouts.html'%}
 
-
-{% block content %}
+{% block content%}
 
 {% include '_messages.html' %}
 
 <div class="container mt-3">
   <nav class="navbar navbar-expand-lg bg-light">
        
-        <a class="navbar-brand" href="{{url_for('admin')}}">Administrador</a>
+        <a class="navbar-brand"  style="margin-left: 20px;" href="{{url_for('admin')}}">Administrador</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('addcat')}}">Cadastrar Categoria</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('addmarca')}}">Cadastrar Marca</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('addproduto')}}">Cadastrar Produtos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url_for('marcas')}}">Marcas</a>
-            </li>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{url_for('categoria')}}">Categorias</a>
-            </li>
-            
-          </ul>
+      
 
         </div>
       </div>
@@ -49,8 +30,10 @@
             <th>Preço</th>
             <th>Desconto</th>
             <th>Marca</th>
-            <th>Editar</th>
-            <th>Deletar</th>
+            <th>Aprovar</th>
+            <th>Reprovar</th>
+            <th>Prazo de Entrega</th>
+
             
         </thead>
 
@@ -58,11 +41,14 @@
             {% for produto in produtos %}
             <tr>
                 <td>{{loop.index}}</td>
+                <td>{{loop.index}}</td>
+                <td>{{loop.index}}</td>
                 <td><img src="{{url_for('static', filename='imagens/' + produto.imagem_1)}}" width="130" height="100"></td>
                 <td>{{produto.name}}</td>
                 <td>R${{produto.preco}}</td>
                 <td>{{produto.desconto}} %</td>
                 <td>{{produto.marca.name}}</td>
+                <td>{{loop.index}}</td>
                
                 <td><a href="{{url_for('updateproduto', id=produto.id)}}" class="btn btn-dark btn-sm">Editar</a></td>
                 <td>
@@ -77,5 +63,6 @@
     </table>
 
 </div>
+
 
 {% endblock content %}
